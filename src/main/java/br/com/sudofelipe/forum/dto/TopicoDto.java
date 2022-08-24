@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import br.com.sudofelipe.forum.modelo.Topico;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 public class TopicoDto {
 
 	@Getter private Long id;
@@ -16,8 +16,20 @@ public class TopicoDto {
 	@Getter private String mensagem;
 	@Getter private LocalDateTime dataCriacao;
 	
+	
+	
 	public static List<TopicoDto> converter(List<Topico> topicos) {
 		
-		return topicos.stream().map(item -> new TopicoDto(item.getId(), item.getTitulo(), item.getMensagem(), item.getDataCriacao())).collect(Collectors.toList());
+		return topicos.stream().map(item -> new TopicoDto(item)).collect(Collectors.toList());
+	}
+
+
+
+	public TopicoDto(Topico topico) {
+		super();
+		this.id = topico.getId();
+		this.titulo = topico.getTitulo();
+		this.mensagem = topico.getMensagem();
+		this.dataCriacao = topico.getDataCriacao();
 	}
 }
