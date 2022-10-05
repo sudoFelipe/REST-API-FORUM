@@ -1,5 +1,7 @@
 package br.com.sudofelipe.forum.controller.form;
 
+import java.util.Optional;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -22,11 +24,11 @@ public class UpdateTopicoForm {
 
 	public Topico atualizar(Long id, TopicoRepository repositorio) {
 		
-		Topico topico = repositorio.getReferenceById(id);
+		Optional<Topico> topico = repositorio.findById(id);
 		
-		topico.setTitulo(this.titulo);
-		topico.setMensagem(this.mensagem);
+		topico.get().setTitulo(this.titulo);
+		topico.get().setMensagem(this.mensagem);
 		
-		return topico;
+		return topico.get();
 	}
 }
